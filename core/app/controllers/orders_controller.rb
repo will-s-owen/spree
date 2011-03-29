@@ -14,7 +14,7 @@ class OrdersController < Spree::BaseController
       @order.line_items = @order.line_items.select {|li| li.quantity > 0 }
       respond_with(@order) { |format| format.html { redirect_to cart_path } }
     else
-      respond_with(@order) 
+      respond_with(@order)
     end
   end
 
@@ -47,6 +47,7 @@ class OrdersController < Spree::BaseController
       @order.add_variant(Variant.find(variant_id), quantity) if quantity > 0
     end if params[:variants]
 
+    ActiveSupport::Notifications.instrument('spree.cart.add', :order => @order)
     respond_with(@order) { |format| format.html { redirect_to cart_path } }
   end
 
@@ -54,7 +55,7 @@ class OrdersController < Spree::BaseController
     if @order = current_order
       @order.line_items.destroy_all
     end
-    
+
     respond_with(@order) { |format| format.html { redirect_to cart_path } }
   end
 
