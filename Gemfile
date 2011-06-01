@@ -1,12 +1,12 @@
 source 'http://rubygems.org'
 
-gem "spree", :path => File.dirname(__FILE__)
+#gem "spree", :path => File.dirname(__FILE__)
 
 gem 'sqlite3-ruby'
 gem "rdoc",  "2.2"
 gem 'rake', '~> 0.8.7'
 
-gemspec
+#gemspec
 
 group :test do
   gem 'rspec-rails', '= 2.5.0'
